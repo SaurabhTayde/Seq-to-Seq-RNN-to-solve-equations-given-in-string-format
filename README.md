@@ -1,12 +1,14 @@
 # Seq-to-Seq-RNN-to-solve-equations-given-in-string-format
 
-1: Introduction
+1: Introduction:
 In this project, a RNN model is created and trained it to learn the meanings of various characters and understand a simple plus operation. The model would infer the meaning of various characters and then learn addition from the given data. RNNs are perfect for solving a problem like this because both the input and output are sequences. So, the model must learn the sequence of the input and then predict a sequence for the output.
 
 2: Generate Data
+
 Model that we’d create will need numeric values in tensors as input. Basically, we can’t simply input the characters as is - so, created a suitable representation of the characters and ultimately of the entire sequences, before we could feed the data to a model. So, characters are converted to one-hot-encoded vectors. The dimension of the vector is equal to the length of our all the characters in our lexicon. These are the total number of features we have.
 
 3: Create the Model
+
 The model that was built has two sections to it. The first part, which is the encoder, is a single SimpleRNN layer with a bunch of hidden units. The output of this layer will be a single vector representation of the input. To achieve this single vector representation of the entire input, used the RepeatVector layer and specify the number of times it should repeat. Then the vector representation of the input is fed into a decoder part of the model. This is another RNN layer which took the vector representation of the input and generated a predicted sequence. Each time step in the output sequence needs to predict probabilities for the various possible characters that the each time step could have. So, we used a Dense layer with the softmax activation function to do this. We want to encapsulate the layer inside a TimeDistributed layer so that the model knows that we want to apply the Dense layer to individual time steps and the hidden state is different for different time steps.
 
 4: Vectorize and De-vectorize the Data
